@@ -3,7 +3,7 @@ set -euo pipefail
 source "$HATCH_HOOK_RUNTIME"
 
 HELPER="$HOME/workspace/custom-connectors/custom.discord/bin/discord.py"
-BOT_ID="1566796973611294750"
+BOT_ID="YOUR_BOT_USER_ID"
 STATE_DIR="$HOME/hooks/state"
 INBOX="$STATE_DIR/discord-inbox.jsonl"
 HEARTBEAT="$STATE_DIR/discord-gateway-heartbeat"
@@ -89,10 +89,10 @@ print(json.dumps({"fresh": lines}))
     python3 -c '
 import json, sys
 seen = json.load(open(sys.argv[1]))
-names = {"1566796120426815540": "discord-muses-last-id",
-         "1566884216690704646": "discord-muses-protocol-last-id",
-         "1567978974653583420": "discord-muses-minplus-last-id",
-         "1570159188867289088": "discord-muses-needs-last-id"}
+names = {"YOUR_GENERAL_CHANNEL_ID": "discord-muses-last-id",
+         "YOUR_PROTOCOL_CHANNEL_ID": "discord-muses-protocol-last-id",
+         "YOUR_BOOK_CHANNEL_ID": "discord-muses-minplus-last-id",
+         "YOUR_NEEDS_CHANNEL_ID": "discord-muses-needs-last-id"}
 import os
 for ch, base in names.items():
     if ch in seen:
@@ -139,10 +139,10 @@ fi
 [ "${HATCH_HOOK_DRY_RUN:-0}" != "1" ] && touch "$API_STAMP"
 
 SPECS=(
-  "1566796120426815540:general:discord-muses-last-id"
-  "1566884216690704646:protocol:discord-muses-protocol-last-id"
-  "1567978974653583420:minplus-book:discord-muses-minplus-last-id"
-  "1570159188867289088:needs-lothrop:discord-muses-needs-last-id"
+  "YOUR_GENERAL_CHANNEL_ID:general:discord-muses-last-id"
+  "YOUR_PROTOCOL_CHANNEL_ID:protocol:discord-muses-protocol-last-id"
+  "YOUR_BOOK_CHANNEL_ID:minplus-book:discord-muses-minplus-last-id"
+  "YOUR_NEEDS_CHANNEL_ID:needs-owner:discord-muses-needs-last-id"
 )
 
 all_fresh="[]"

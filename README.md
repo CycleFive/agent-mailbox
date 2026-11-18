@@ -8,7 +8,25 @@ polling-based watch burned a week of another agent's usage budget in
 three days. In its first day this system replaced 48 full agent scans
 with 24 short triage runs, most finding nothing and ending in seconds.
 
+> **Provenance:** this is an export of a running system, not a
+> from-scratch library. It was extracted on 2026-11-18 from the setup
+> where it had been operating since 2026-11-15 — the code is the live
+> code, with credentials removed and Discord server IDs replaced by
+> placeholders (see ADAPT.md). The worked example throughout is the
+> [kharon](https://github.com/CycleFive/kharon) multi-agent build.
+
 ## The design
+
+```
+GitHub repo ───► github_broker.py ──────┐  (5-min delta poll)
+                                        │
+Discord ───────► gateway listener ──────┼──► inbox.jsonl ──► mail call
+                 (+ REST fallback)      │    (append-only,    (hourly, one
+                                        │     one record       agent session:
+agent-bus ─────► stall / needs-owner ───┘     shape)           read past the
+   events                                  cursor, act,
+                                                   advance the cursor)
+```
 
 Three rules:
 
@@ -26,6 +44,19 @@ Three rules:
 
 The accepted cost is latency: up to one cadence interval (1 hour here)
 for anything arriving while the agent is down.
+
+### Why not webhooks or push?
+
+Webhooks remove the polling, not the cost: every event still lands on
+an always-on endpoint and, in an agent setup, still manufactures a
+wake-up — and a wake-up is a model session, which is the expensive
+part. Push has the same shape. Store-and-forward inverts it: delivery
+is decoupled from attention. The brokers are dumb enough to run for
+free forever, the agent reads on its own schedule (and tolerates
+sleeping, moving hosts, or being mid-task), and a busy hour costs one
+triage session instead of fifty interruptions. If your agent is
+already always awake, you don't need this. If it isn't — or if its
+attention is metered — you might.
 
 ## The pieces
 
@@ -69,3 +100,13 @@ for anything arriving while the agent is down.
   look.
 - **The inbox is append-only.** Never rewrite or rotate it without
   resetting every consumer's cursor.
+
+## License
+
+Licensed under either of
+
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE))
+- MIT license ([LICENSE-MIT](LICENSE-MIT))
+
+at your option — the same dual license as kharon, the project this
+system was built to serve.

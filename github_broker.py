@@ -39,7 +39,7 @@ STATE = Path("/home/hatch/workspace/goals/kharon-build-participation-nyx-lead/hi
 BST = Path("/home/hatch/workspace/mailbox/github-broker-state.json")
 LOG = Path("/home/hatch/workspace/mailbox/github-broker.log")
 BOT = "cycle-five-muse[bot]"
-NEEDS_CHANNEL = "1570159188867289088"
+NEEDS_CHANNEL = "YOUR_NEEDS_CHANNEL_ID"
 DRY = os.environ.get("HATCH_HOOK_DRY_RUN") == "1"
 
 

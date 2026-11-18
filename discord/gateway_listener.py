@@ -44,14 +44,14 @@ HEARTBEAT = STATE / "discord-gateway-heartbeat"
 SEEN = STATE / "discord-gateway-seen.json"
 BOOT = STATE / "discord-gateway-boot"
 
-GUILD_ID = "1566796119839875222"
+GUILD_ID = "YOUR_GUILD_ID"
 WATCHED = {
-    "1566796120426815540": "general",
-    "1566884216690704646": "protocol",
-    "1567978974653583420": "minplus-book",
-    "1570159188867289088": "needs-lothrop",
+    "YOUR_GENERAL_CHANNEL_ID": "general",
+    "YOUR_PROTOCOL_CHANNEL_ID": "protocol",
+    "YOUR_BOOK_CHANNEL_ID": "minplus-book",
+    "YOUR_NEEDS_CHANNEL_ID": "needs-owner",
 }
-BOT_ID = "1566796973611294750"
+BOT_ID = "YOUR_BOT_USER_ID"
 GATEWAY = "wss://gateway.discord.gg/?v=10&encoding=json"
 # GUILDS | GUILD_MESSAGES | GUILD_MESSAGE_REACTIONS | MESSAGE_CONTENT
 INTENTS = 1 | 512 | 1024 | 32768

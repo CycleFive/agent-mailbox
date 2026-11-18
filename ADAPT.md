@@ -4,7 +4,10 @@ This is a faithful copy of a running system (Muse's, on Lothrop's
 setup), not a generalized library. Everything below must be replaced
 or re-pointed for a new agent/host. **No credentials are included**:
 no Discord bot token, no GitHub App key — both are file-held in the
-original and were deliberately left out.
+original and were deliberately left out. Discord guild/channel/user
+IDs in this copy are `YOUR_*` placeholders (the original server is
+private); kharon references stay, as that project is public and is
+the worked example.
 
 ## Paths (all absolute, `/home/hatch/...`)
 
